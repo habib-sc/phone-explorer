@@ -38,6 +38,8 @@ const displayPhone = phones => {
 
 // phone detail function 
 const getPhoneDetail = phoneId => {
+    // clearing previous phone details 
+    document.getElementById('detail-container').textContent = '';
     const detailApiUrl = `https://openapi.programming-hero.com/api/phone/${phoneId}`;
 
     fetch(detailApiUrl)
@@ -48,5 +50,36 @@ const getPhoneDetail = phoneId => {
 
 // Display phone detail function 
 const displayPhoneDetail = phoneInfo => {
+    const detailContainer = document.getElementById('detail-container');
+    const div = document.createElement('div');
+    div.innerHTML = `
+    <img src="./images/phone.jpg" class="card-img-top" alt="...">
+    <div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><span class="fw-bold">Name: </span>Iphone</li>
+            <li class="list-group-item"><span class="fw-bold">Brand: </span>Iphone</li>
+            <li class="list-group-item"><span class="fw-bold">Realease Date: </span>Iphone</li>
+        </ul>
+
+        <h5 class="px-3 mt-4 fw-bold">Main Featuers</h5>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><span class="fw-bold">Chip Set: </span>Iphone</li>
+            <li class="list-group-item"><span class="fw-bold">Display: </span>Iphone</li>
+            <li class="list-group-item"><span class="fw-bold">Memory: </span>Iphone</li>
+            <li class="list-group-item"><span class="fw-bold">Sensors: </span>Iphone</li>
+            <li class="list-group-item"><span class="fw-bold">Storage: </span>Iphone</li>
+        </ul>
+
+        <h5 class="px-3 mt-4 fw-bold">Others</h5>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><span class="fw-bold">Bluetooth: </span>Iphone</li>
+            <li class="list-group-item"><span class="fw-bold">NFC: </span>Iphone</li>
+            <li class="list-group-item"><span class="fw-bold">Radio: </span>Iphone</li>
+            <li class="list-group-item"><span class="fw-bold">USB: </span>Iphone</li>
+            <li class="list-group-item"><span class="fw-bold">WLAN: </span>Iphone</li>
+        </ul>
+    </div>
+    `;
+    detailContainer.appendChild(div);
     console.log(phoneInfo);
 }
