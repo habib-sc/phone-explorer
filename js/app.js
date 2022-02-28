@@ -70,27 +70,26 @@ const displayPhoneDetail = phoneInfo => {
             <li class="list-group-item">
                 <span class="fw-bold">Sensors: </span>
                 <ul id="phone-sensors" class="list-group list-group-flush">
-                
                 </ul>
             </li>
-            <li class="list-group-item"><span class="fw-bold">Storage: </span>Iphone</li>
+            <li class="list-group-item"><span class="fw-bold">Storage: </span>${phoneInfo.mainFeatures.storage}</li>
         </ul>
 
-        <h5 class="px-3 mt-4 fw-bold">Others</h5>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item"><span class="fw-bold">Bluetooth: </span>Iphone</li>
-            <li class="list-group-item"><span class="fw-bold">NFC: </span>Iphone</li>
-            <li class="list-group-item"><span class="fw-bold">Radio: </span>Iphone</li>
-            <li class="list-group-item"><span class="fw-bold">USB: </span>Iphone</li>
-            <li class="list-group-item"><span class="fw-bold">WLAN: </span>Iphone</li>
-        </ul>
+        <div id="others-container">
+        
+        </div>
     </div>
     `;
     detailContainer.appendChild(div);
     getSensors(sensorsArray);
+    if (phoneInfo.others) {
+        getOthers(phoneInfo.others)
+    }
+
     console.log(phoneInfo);
 }
 
+// Sensor getting function 
 const getSensors = sensorsArray => {
     if (sensorsArray) {
         const sensorsContainer = document.getElementById('phone-sensors');
@@ -99,7 +98,22 @@ const getSensors = sensorsArray => {
             li.innerText = sensor;
             li.classList.add('list-group-item');
             sensorsContainer.appendChild(li);
-            console.log(sensor);
         })
     }
+}
+
+// other info getting function 
+const getOthers = others => {
+    const othersContainer = document.getElementById('others-container');
+    othersContainer.innerHTML = `
+    <h5 class="px-3 mt-4 fw-bold">Others</h5>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><span class="fw-bold">Bluetooth: </span>${others.Bluetooth}</li>
+        <li class="list-group-item"><span class="fw-bold">GPS: </span>${others.GPS}</li>
+        <li class="list-group-item"><span class="fw-bold">NFC: </span>${others.NFC}</li>
+        <li class="list-group-item"><span class="fw-bold">Radio: </span>${others.Radio}</li>
+        <li class="list-group-item"><span class="fw-bold">USB: </span>${others.USB}</li>
+        <li class="list-group-item"><span class="fw-bold">WLAN: </span>${others.WLAN}</li>
+    </ul>
+    `;
 }
