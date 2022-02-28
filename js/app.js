@@ -1,4 +1,6 @@
 const searchPhone = () => {
+    // clearing before search result 
+    document.getElementById('phone-container').textContent = '';
     // Getting search input 
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
@@ -18,11 +20,11 @@ const displayPhone = phones => {
         const div = document.createElement('div');
         div.classList.add('col');
         div.innerHTML = `
-        <div class="shadow pe-radius">
-            <img src="./images/phone.jpg" class="card-img-top" alt="...">
+        <div class="shadow pe-radius p-3">
+            <img src="${phone.image}" class="card-img-top" alt="...">
             <div class="card-body text text-center">
-                <h5 class="card-title">Iphone 11</h5>
-                <p class="card-text">Iphone</p>
+                <h5 class="card-title">${phone.phone_name}</h5>
+                <p class="card-text">${phone.brand}</p>
                 <button id="product-detail" class="btn fs-6 px-3 py-2 text-white" style="background-color: #5E63B6;">Get
                     Details</button>
             </div>
