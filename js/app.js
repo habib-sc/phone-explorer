@@ -51,22 +51,28 @@ const getPhoneDetail = phoneId => {
 // Display phone detail function 
 const displayPhoneDetail = phoneInfo => {
     const detailContainer = document.getElementById('detail-container');
+    const sensorsArray = phoneInfo.mainFeatures.sensors;
     const div = document.createElement('div');
     div.innerHTML = `
-    <img src="./images/phone.jpg" class="card-img-top" alt="...">
+    <img src="${phoneInfo.image}" class="card-img-top" alt="...">
     <div>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item"><span class="fw-bold">Name: </span>Iphone</li>
-            <li class="list-group-item"><span class="fw-bold">Brand: </span>Iphone</li>
-            <li class="list-group-item"><span class="fw-bold">Realease Date: </span>Iphone</li>
+            <li class="list-group-item"><span class="fw-bold">Name: </span>${phoneInfo.name}</li>
+            <li class="list-group-item"><span class="fw-bold">Brand: </span>${phoneInfo.brand}</li>
+            <li class="list-group-item"><span class="fw-bold">Realease Date: </span>${phoneInfo.releaseDate}</li>
         </ul>
 
         <h5 class="px-3 mt-4 fw-bold">Main Featuers</h5>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item"><span class="fw-bold">Chip Set: </span>Iphone</li>
-            <li class="list-group-item"><span class="fw-bold">Display: </span>Iphone</li>
-            <li class="list-group-item"><span class="fw-bold">Memory: </span>Iphone</li>
-            <li class="list-group-item"><span class="fw-bold">Sensors: </span>Iphone</li>
+            <li class="list-group-item"><span class="fw-bold">Chip Set: </span>${phoneInfo.mainFeatures.chipSet}</li>
+            <li class="list-group-item"><span class="fw-bold">Display: </span>${phoneInfo.mainFeatures.displaySize}</li>
+            <li class="list-group-item"><span class="fw-bold">Memory: </span>${phoneInfo.mainFeatures.memory}</li>
+            <li class="list-group-item">
+                <span class="fw-bold">Sensors: </span>
+                <ul id="phone-sensors" class="list-group list-group-flush">
+                
+                </ul>
+            </li>
             <li class="list-group-item"><span class="fw-bold">Storage: </span>Iphone</li>
         </ul>
 
@@ -81,5 +87,19 @@ const displayPhoneDetail = phoneInfo => {
     </div>
     `;
     detailContainer.appendChild(div);
+    getSensors(sensorsArray);
     console.log(phoneInfo);
+}
+
+const getSensors = sensorsArray => {
+    if (sensorsArray) {
+        const sensorsContainer = document.getElementById('phone-sensors');
+        sensorsArray.forEach(sensor => {
+            const li = document.createElement('li');
+            li.innerText = sensor;
+            li.classList.add('list-group-item');
+            sensorsContainer.appendChild(li);
+            console.log(sensor);
+        })
+    }
 }
