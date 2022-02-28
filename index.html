@@ -29,8 +29,8 @@
                 <h5 class="text-center pe-navy">Search Phone By Name</h5>
             </div>
             <div class="input-group mb-3 px-md-5 mx-auto mt-5">
-                <input type="text" class="form-control py-2" placeholder="Search Phone..." aria-label="Recipient's username" aria-describedby="button-addon2">
-                <button id="search-btn" class="btn fs-5 text-white" type="button" style="background-color: #5E63B6;">
+                <input id="search-field" type="text" class="form-control py-2" placeholder="Search Phone..." aria-label="Recipient's username" aria-describedby="button-addon2">
+                <button onclick="searchPhone()" class="btn fs-5 text-white" style="background-color: #5E63B6;">
                     <i class="bi bi-search"></i>
                     Search</button>
             </div>
@@ -39,9 +39,9 @@
 
         <!-- Search Result Section Start  -->
         <section class="my-5">
-            <div class="row">
+            <div class="row gx-5">
                 <div class="col-9">
-                    <div class="row row-cols-1 row-cols-sm-3 g-4">
+                    <div id="phone-container" class="row row-cols-1 row-cols-sm-3 g-4">
                         <div class="col">
                             <div class="shadow pe-radius">
                                 <img src="./images/phone.jpg" class="card-img-top" alt="...">
