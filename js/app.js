@@ -16,8 +16,31 @@ const searchPhone = () => {
 
 // Phone display function 
 const displayPhone = phones => {
+    let phonesDefault = phones.slice(0, 20);
+
+    if (phones.length > 20) {
+        // Adding Show all button 
+        const showAllContainer = document.getElementById('show-all-container');
+        showAllContainer.innerHTML = `
+        <button id="show-all-phones" class="btn fs-6 px-3 py-2 text-white" style="background-color: #5E63B6;">Show All Phones</button>
+        `;
+
+        // Displaying all phones 
+        document.getElementById('show-all-phones').addEventListener('click', () => {
+            showPhonesByCount(phones)
+        })
+    }
+
+    showPhonesByCount(phonesDefault);
+}
+
+const showPhonesByCount = phonesCount => {
+    // clearing previous phones
+    document.getElementById('phone-container').textContent = '';
+
+    // Getting phones 
     const phoneContainer = document.getElementById('phone-container');
-    phones.forEach(phone => {
+    phonesCount.forEach(phone => {
         const div = document.createElement('div');
         div.classList.add('col');
         div.innerHTML = `
@@ -32,7 +55,6 @@ const displayPhone = phones => {
         </div>
         `;
         phoneContainer.appendChild(div);
-        console.log(phone);
     })
 }
 
