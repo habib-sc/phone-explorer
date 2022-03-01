@@ -21,3 +21,7 @@ body {
 .pe-bg {
     background-color: #5E63B6;
 }
+
+#search-loader {
+    display: none;
+}

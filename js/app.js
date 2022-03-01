@@ -1,14 +1,18 @@
 const getTag = tagId => document.getElementById(tagId);
 const clearContent = tagId => document.getElementById(tagId).textContent = '';
+const toggleSpinner = displayProperty => getTag('search-loader').style.display = displayProperty;
 
 const searchPhone = () => {
     // clearing before search result 
     clearContent('phone-container');
     clearContent('no-phone-found');
 
+    // search loader toggle 
+    toggleSpinner('block');
+
     // Getting search input 
     const searchField = getTag('search-field');
-    const searchText = searchField.value;
+    const searchText = searchField.value.toLowerCase();
 
     // Set api url 
     const phoneApiUrl = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
@@ -66,6 +70,9 @@ const showPhonesByCount = phonesCount => {
         `;
         phoneContainer.appendChild(div);
     })
+
+    // search loader toggle 
+    toggleSpinner('none');
 }
 
 // phone detail function 
@@ -126,8 +133,6 @@ const displayPhoneDetail = phoneInfo => {
     } else {
         showError('others-container', 'Others info not found!');
     }
-
-    console.log(phoneInfo);
 }
 
 // Sensor getting function 
