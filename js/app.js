@@ -1,9 +1,13 @@
+const getTag = tagId => document.getElementById(tagId);
+const clearContent = tagId => document.getElementById(tagId).textContent = '';
+
 const searchPhone = () => {
     // clearing before search result 
-    document.getElementById('phone-container').textContent = '';
-    document.getElementById('no-phone-found').textContent = '';
+    clearContent('phone-container');
+    clearContent('no-phone-found');
+
     // Getting search input 
-    const searchField = document.getElementById('search-field');
+    const searchField = getTag('search-field');
     const searchText = searchField.value;
 
     // Set api url 
@@ -19,21 +23,19 @@ const searchPhone = () => {
 const displayPhone = phones => {
     let phonesDefault = phones.slice(0, 20);
 
-    console.log(phones.length);
-
     if (phones.length == 0) {
         showError('no-phone-found', 'No Phone found!');
     }
 
     if (phones.length > 20) {
         // Adding Show all button 
-        const showAllContainer = document.getElementById('show-all-container');
+        const showAllContainer = getTag('show-all-container');
         showAllContainer.innerHTML = `
         <button id="show-all-phones" class="btn fs-6 px-3 py-2 text-white" style="background-color: #5E63B6;">Show All Phones</button>
         `;
 
         // Displaying all phones 
-        document.getElementById('show-all-phones').addEventListener('click', () => {
+        getTag('show-all-phones').addEventListener('click', () => {
             showPhonesByCount(phones)
         })
     }
@@ -43,10 +45,10 @@ const displayPhone = phones => {
 
 const showPhonesByCount = phonesCount => {
     // clearing previous phones
-    document.getElementById('phone-container').textContent = '';
+    clearContent('phone-container');
 
     // Getting phones 
-    const phoneContainer = document.getElementById('phone-container');
+    const phoneContainer = getTag('phone-container');
     phonesCount.forEach(phone => {
         const div = document.createElement('div');
         div.classList.add('col');
@@ -68,7 +70,7 @@ const showPhonesByCount = phonesCount => {
 // phone detail function 
 const getPhoneDetail = phoneId => {
     // clearing previous phone details 
-    document.getElementById('detail-container').textContent = '';
+    clearContent('detail-container');
     const detailApiUrl = `https://openapi.programming-hero.com/api/phone/${phoneId}`;
 
     fetch(detailApiUrl)
@@ -78,7 +80,7 @@ const getPhoneDetail = phoneId => {
 
 // Display phone detail function 
 const displayPhoneDetail = phoneInfo => {
-    const detailContainer = document.getElementById('detail-container');
+    const detailContainer = getTag('detail-container');
     const sensorsArray = phoneInfo.mainFeatures.sensors;
     const div = document.createElement('div');
     div.innerHTML = `
@@ -131,7 +133,7 @@ const displayPhoneDetail = phoneInfo => {
 const getSensors = sensorsArray => {
     // getting sensors if available 
     if (sensorsArray) {
-        const sensorsContainer = document.getElementById('phone-sensors');
+        const sensorsContainer = getTag('phone-sensors');
         sensorsArray.forEach(sensor => {
             const li = document.createElement('li');
             li.innerText = sensor;
@@ -143,7 +145,7 @@ const getSensors = sensorsArray => {
 
 // other info getting function 
 const getOthers = others => {
-    const othersContainer = document.getElementById('others-container');
+    const othersContainer = getTag('others-container');
     othersContainer.innerHTML = `
     <h5 class="px-3 mt-4 fw-bold">Others</h5>
     <ul class="list-group list-group-flush">
@@ -159,6 +161,6 @@ const getOthers = others => {
 
 // Erros message showing function  
 const showError = (tagId, message) => {
-    const tag = document.getElementById(tagId);
+    const tag = getTag(tagId);
     tag.innerHTML = `<p class="px-3 fw-bold text-danger">${message}</p>`;
 }
