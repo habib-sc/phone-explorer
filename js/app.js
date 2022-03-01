@@ -45,7 +45,6 @@ const getPhoneDetail = phoneId => {
     fetch(detailApiUrl)
         .then(response => response.json())
         .then(dataset => displayPhoneDetail(dataset.data));
-
 }
 
 // Display phone detail function 
@@ -59,7 +58,7 @@ const displayPhoneDetail = phoneInfo => {
         <ul class="list-group list-group-flush">
             <li class="list-group-item"><span class="fw-bold">Name: </span>${phoneInfo.name}</li>
             <li class="list-group-item"><span class="fw-bold">Brand: </span>${phoneInfo.brand}</li>
-            <li class="list-group-item"><span class="fw-bold">Realease Date: </span>${phoneInfo.releaseDate}</li>
+            <li id="release-date" class="list-group-item"><span class="fw-bold">Realease Date: </span>${phoneInfo.releaseDate}</li>
         </ul>
 
         <h5 class="px-3 mt-4 fw-bold">Main Featuers</h5>
@@ -81,9 +80,19 @@ const displayPhoneDetail = phoneInfo => {
     </div>
     `;
     detailContainer.appendChild(div);
+
+    // Showing message if relasedate not found
+    if (phoneInfo.releaseDate == false) {
+        showError('release-date', 'Release Date not found!');
+    }
+
     getSensors(sensorsArray);
+
+    // Getting others info if available 
     if (phoneInfo.others) {
         getOthers(phoneInfo.others)
+    } else {
+        showError('others-container', 'Others info not found!');
     }
 
     console.log(phoneInfo);
@@ -91,6 +100,7 @@ const displayPhoneDetail = phoneInfo => {
 
 // Sensor getting function 
 const getSensors = sensorsArray => {
+    // getting sensors if available 
     if (sensorsArray) {
         const sensorsContainer = document.getElementById('phone-sensors');
         sensorsArray.forEach(sensor => {
@@ -116,4 +126,10 @@ const getOthers = others => {
         <li class="list-group-item"><span class="fw-bold">WLAN: </span>${others.WLAN}</li>
     </ul>
     `;
+}
+
+// Erros message showing function  
+const showError = (tagId, message) => {
+    const tag = document.getElementById(tagId);
+    tag.innerHTML = `<p class="px-3 fw-bold text-danger">${message}</p>`;
 }
