@@ -14,6 +14,13 @@ const searchPhone = () => {
     const searchField = getTag('search-field');
     const searchText = searchField.value.toLowerCase();
 
+    // Vaidation of search input 
+    if (searchText == '') {
+        alert('Please Enter Search Keyword!');
+        toggleSpinner('none');
+        return;
+    }
+
     // Set api url 
     const phoneApiUrl = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
 
