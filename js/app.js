@@ -36,7 +36,8 @@ const displayPhone = phones => {
 
         // Displaying all phones 
         getTag('show-all-phones').addEventListener('click', () => {
-            showPhonesByCount(phones)
+            showPhonesByCount(phones);
+            getTag('show-all-phones').style.display = 'none';
         })
     }
 
