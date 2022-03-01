@@ -1,6 +1,7 @@
 const searchPhone = () => {
     // clearing before search result 
     document.getElementById('phone-container').textContent = '';
+    document.getElementById('no-phone-found').textContent = '';
     // Getting search input 
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
@@ -17,6 +18,12 @@ const searchPhone = () => {
 // Phone display function 
 const displayPhone = phones => {
     let phonesDefault = phones.slice(0, 20);
+
+    console.log(phones.length);
+
+    if (phones.length == 0) {
+        showError('no-phone-found', 'No Phone found!');
+    }
 
     if (phones.length > 20) {
         // Adding Show all button 
